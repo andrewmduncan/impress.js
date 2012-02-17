@@ -213,7 +213,7 @@
                 transformStyle: "preserve-3d"
             });
 
-        }
+        };
         
         steps.forEach(processStep);
 
@@ -312,6 +312,11 @@
             
             return goto(next);
         };
+
+        var add = function (el) {
+            processStep(el, steps.length);
+            steps = $$(".step", root);
+        };
         
         window.addEventListener("hashchange", function () {
             goto( getElementFromUrl() );
@@ -328,7 +333,8 @@
         return (roots[ "impress-root-" + rootId ] = {
             goto: goto,
             next: next,
-            prev: prev
+            prev: prev,
+            add: add
         });
 
     }
