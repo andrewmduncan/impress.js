@@ -180,8 +180,8 @@
         var isStep = function ( el ) {
             return !!(el && el.id && stepData["impress-" + el.id]);
         }
-        
-        steps.forEach(function ( el, idx ) {
+
+        var processStep = function ( el, idx ) {
             var data = el.dataset,
                 step = {
                     translate: {
@@ -197,13 +197,13 @@
                     scale: data.scale || 1,
                     el: el
                 };
-            
+
             if ( !el.id ) {
                 el.id = "step-" + (idx + 1);
             }
-            
+
             stepData["impress-" + el.id] = step;
-            
+
             css(el, {
                 position: "absolute",
                 transform: "translate(-50%,-50%)" +
@@ -212,8 +212,10 @@
                            scale(step.scale),
                 transformStyle: "preserve-3d"
             });
-            
-        });
+
+        }
+        
+        steps.forEach(processStep);
 
         // making given step active
 
